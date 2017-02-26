@@ -122,7 +122,7 @@ SETUP_PLUGINS () { # Télécharge les plugins, décompresse et copie dans $final
 			false	# Format d'archive non pris en charge.
 		fi
 		# Copie les fichiers sources
-		sudo cp -a ${file%.*}/. "plugins"
+		sudo cp -a ${file%.*}/. "$final_path/plugins"
     done < md5_log
 }
 

@@ -100,7 +100,7 @@ SETUP_SOURCE () {	# Télécharge la source, décompresse et copie dans $final_pa
 	fi
 }
 
-SETUP_PLUGIN () { # Télécharge les plugins, décompresse et copie dans $final_path
+SETUP_PLUGINS () { # Télécharge les plugins, décompresse et copie dans $final_path
     wget -nv --show-progress -i source_plugins   
     wget -nv --show-progress -i source_md5_plugins                                                
     while IFS=: read md5 file                                                                     
@@ -123,7 +123,7 @@ SETUP_PLUGIN () { # Télécharge les plugins, décompresse et copie dans $final_
 		fi
 		# Copie les fichiers sources
 		sudo cp -a ${file%.*}/. "plugins"
-    done < md5_plugins 
+    done < md5_log
 }
 
 POOL_FPM () {	# Créer le fichier de configuration du pool php-fpm et le configure.

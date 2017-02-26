@@ -53,6 +53,7 @@ SETUP_SOURCE "spip-2.1.zip"
 sudo mkdir "$final_path/plugins"
 # Télécharge les plugins
 SETUP_PLUGINS
+sudo mv "$final_path/plugins/autoembed" $final_path
 
 # Set permissions to spip directory
 sudo chown -R www-data: $final_path

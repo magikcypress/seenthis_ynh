@@ -101,8 +101,8 @@ SETUP_SOURCE () {	# Télécharge la source, décompresse et copie dans $final_pa
 }
 
 SETUP_PLUGINS () { # Télécharge les plugins, décompresse et copie dans $final_path
-    wget -nv --show-progress -i source_plugins   
-    wget -nv --show-progress -i source_md5_plugins                                                
+    wget -nv --show-progress -i ../sources/source_plugins   
+    wget -nv --show-progress -i ../sources/source_md5_plugins                                                
     while IFS=: read md5 file                                                                     
     do  
     	# Vérifie la somme de contrôle de la source téléchargée.                                                                                          

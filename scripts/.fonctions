@@ -115,14 +115,12 @@ SETUP_PLUGINS () { # Télécharge les plugins, décompresse et copie dans $final
 
 		# Décompresse la source
 		if [ "$(echo ${file##*.})" == "gz" ]; then
-			tar -x -f "${file}"
+			sudo tar -x -f "${file}" -C plugins/
 		elif [ "$(echo ${file##*.})" == "zip" ]; then
-			unzip -q "${file}"
+			sudo unzip -q "${file}" -d plugins/
 		else
 			false	# Format d'archive non pris en charge.
 		fi
-		# Copie les fichiers sources
-		sudo cp -a ${file%.*}/. "$final_path/plugins"
     done < md5_log
 }
 

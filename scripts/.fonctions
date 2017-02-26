@@ -100,24 +100,30 @@ SETUP_SOURCE () {	# Télécharge la source, décompresse et copie dans $final_pa
 	fi
 }
 
-SETUP_PLUGINS () {	# Télécharge les plugins, décompresse et copie dans $final_path
-	for (( i = 0; i < 10; i++ )); do
+SETUP_PLUGIN () { # Télécharge les plugins, décompresse et copie dans $final_path
+    wget -nv --show-progress -i source_plugins   
+    wget -nv --show-progress -i source_md5_plugins                                                
+    while IFS=: read md5 file                                                                     
+    do  
+    	# Vérifie la somme de contrôle de la source téléchargée.                                                                                          
+        check_md5=$(md5sum ${file})                                                               
+        if [ "${check_md5}" != "${md5}" ]; then                                                   
+           (echo "OK source ${file}")                                                            
+        else                                                                                      
+           (echo "Corrupt source ${file}" >&2 && false)                                          
+      fi                                                                                        
 
-		wget -nv --show-progress -i ../sources/plugins_url -O $1
-		# Vérifie la somme de contrôle de la source téléchargée.
-		md5sum -c ../sources/plugins_md5 --status || (echo "Corrupt source" >&2 && false)
 		# Décompresse la source
 		if [ "$(echo ${1##*.})" == "gz" ]; then
-			tar -x -f $1
+			tar -x -f $file
 		elif [ "$(echo ${1##*.})" == "zip" ]; then
-			unzip -q $1
+			unzip -q $file
 		else
 			false	# Format d'archive non pris en charge.
 		fi
 		# Copie les fichiers sources
-		sudo cp -a $(cat ../sources/source_dir)/. "$final_path/plugins"
-
-	done
+		sudo cp -a ${file%.*}/. "plugins"
+    done < md5_plugins 
 }
 
 POOL_FPM () {	# Créer le fichier de configuration du pool php-fpm et le configure.

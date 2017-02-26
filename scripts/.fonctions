@@ -115,9 +115,9 @@ SETUP_PLUGINS () { # Télécharge les plugins, décompresse et copie dans $final
 
 		# Décompresse la source
 		if [ "$(echo ${1##*.})" == "gz" ]; then
-			tar -x -f $file
+			tar -x -f "${file}"
 		elif [ "$(echo ${1##*.})" == "zip" ]; then
-			unzip -q $file
+			unzip -q "${file}"
 		else
 			false	# Format d'archive non pris en charge.
 		fi

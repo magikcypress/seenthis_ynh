@@ -118,7 +118,7 @@ mysql -e "ALTER TABLE spip_me_recherche ENGINE=MyISAM;" -u $db_user -p$db_pwd $d
 #mysql -e "ALTER TABLE spip_me_recherche ADD FULLTEXT titre (`titre`);" -u $db_user -p$db_pwd $db_user
 #mysql -e "ALTER TABLE spip_me_recherche ADD FULLTEXT texte (`texte`);" -u $db_user -p$db_pwd $db_user
 mysql -e "ALTER TABLE spip_syndic ENGINE=MyISAM;" -u $db_user -p$db_pwd $db_user
-mysql -e "ALTER TABLE spip_syndic ADD FULLTEXT tout (`url_site`,`titre`,`texte`);" -u $db_user -p$db_pwd $db_user
+mysql -e "ALTER TABLE spip_syndic ADD FULLTEXT tout (url_site,titre,texte);" -u $db_user -p$db_pwd $db_user
 
 # Donne un accès public pour curl
 ynh_app_setting_set $app unprotected_uris "/"

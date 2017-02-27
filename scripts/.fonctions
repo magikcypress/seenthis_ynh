@@ -101,27 +101,27 @@ SETUP_SOURCE () {	# Télécharge la source, décompresse et copie dans $final_pa
 }
 
 SETUP_PLUGINS () { # Télécharge les plugins, décompresse et copie dans $final_path
-    wget -nv --show-progress -i ../sources/source_plugins   
-    wget -nv --show-progress -i ../sources/source_md5_plugins                                                
-    while IFS=: read md5 file                                                                     
-    do  
-    	# Vérifie la somme de contrôle de la source téléchargée.                                                                                          
-        check_md5=$(md5sum ${file})                                                               
-        if [ "${check_md5}" != "${md5}" ]; then                                                   
-           (echo "OK source ${file}")                                                            
-        else                                                                                      
-           (echo "Corrupt source ${file}" >&2 && false)                                          
-      fi                                                                                        
+	wget -nv --show-progress -i ../sources/source_plugins
+	wget -nv --show-progress -i ../sources/source_md5_plugins
+	while IFS=: read md5 file
+	do
+		# Vérifie la somme de contrôle de la source téléchargée.
+		check_md5=$(md5sum ${file})
+		if [ "${check_md5}" != "${md5}" ]; then
+			(echo "OK source ${file}")
+		else
+			(echo "Corrupt source ${file}" >&2 && false)
+		fi
 
 		# Décompresse la source
 		if [ "$(echo ${file##*.})" == "gz" ]; then
-			sudo tar -x -f "${file}" -C plugins/
+			sudo tar -x -f "${file}" -C "$final_path/plugins/"
 		elif [ "$(echo ${file##*.})" == "zip" ]; then
-			sudo unzip -q "${file}" -d plugins/
+			sudo unzip -q "${file}" -d "$final_path/plugins/"
 		else
 			false	# Format d'archive non pris en charge.
 		fi
-    done < md5_log
+	done < md5_log
 }
 
 POOL_FPM () {	# Créer le fichier de configuration du pool php-fpm et le configure.

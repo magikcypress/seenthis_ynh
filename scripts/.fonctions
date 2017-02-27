@@ -108,7 +108,7 @@ SETUP_PLUGINS () { # Télécharge les plugins, décompresse et copie dans $final
 		# Vérifie la somme de contrôle de la source téléchargée.
 		md5_file=$(md5sum ${file})
 		check_md5=$(echo ${md5_file} | awk -F' ' {'print $1'})
-		if [ "${check_md5}" != "${md5}" ]; then
+		if [ "${check_md5}" == "${md5}" ]; then
 			(echo "OK source ${file}")
 		else
 			(echo "Corrupt source ${file}" >&2 && false)

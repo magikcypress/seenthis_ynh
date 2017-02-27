@@ -83,8 +83,8 @@ sudo sed -i "s/__DB_USER__/$db_user/g" $final_path/config/connect.php
 sudo sed -i "s/__DB_PWD__/$db_pwd/g" $final_path/config/connect.php                                                                           
 
 # Changer les variables du fichier mes_options de SPIP
-sudo sed -i "s/__DOMAIN__/$domain/g" $final_path/config/mes_options.php
-sudo sed -i "s/__PATH__/$path/g" $final_path/config/mes_options.php
+sudo sed -i "s@__DOMAIN__@$domain@g" $final_path/config/mes_options.php
+sudo sed -i "s@__PATH__@$path@g" $final_path/config/mes_options.php
 
 db_md5=$(echo $db_pwd | md5sum | awk '{print $1}')
 db_sha=$(echo $db_pwd | openssl dgst -sha1 -hmac "key" | awk -F'= ' {'print $2'})

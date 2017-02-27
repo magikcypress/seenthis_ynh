@@ -5,14 +5,14 @@ $ignore_auth_http = true;
 
 // localhost/seenthis
 define('_ANALYTICS', '');
-define('_HOST', '__DOMAIN__/__PATH__');
+define('_HOST', '__DOMAIN____PATH__');
 define('_STATIC_HOST', _HOST);
 define('_SHORT_HOST', '__DOMAIN__/seenli');
 define('_API_HTTPS', true); # ne pas forcer https sur l'API
 
 $GLOBALS['table_titre']['auteurs'] = 'login';
 
-define('_URL_SEENTHIS', 'https://__DOMAIN__/__PATH__/');  # adresse de l'API
+define('_URL_SEENTHIS', 'https://__DOMAIN____PATH__/');  # adresse de l'API
 define('_SVG2PNG_SERVER', 'http://rezo.net/svg2png.php'); # convertisseur de SVG
 
 #define('_OPENCALAIS_APIKEY', "xxxxxxxxxxxx");

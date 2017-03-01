@@ -56,6 +56,6 @@ When installing Seenthis, plugins are not enabled. You need to go to "Configurat
 
 ## Versionning
 
-###Version 1.0.0 (25/02/17)
+### Version 1.0.0 (25/02/17)
 
 - Create script install

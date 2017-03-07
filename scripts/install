@@ -4,6 +4,8 @@
 set -eu
 
 source .fonctions	# Charge les fonctions génériques habituellement utilisées dans le script
+# Source app helpers
+source /usr/share/yunohost/helpers
 
 CLEAN_SETUP () {
 # Nettoyage des résidus d'installation non pris en charge par le script remove.
@@ -20,9 +22,6 @@ language=$YNH_APP_ARG_LANGUAGE
 is_public=$YNH_APP_ARG_IS_PUBLIC
 
 app=$YNH_APP_INSTANCE_NAME
-
-# Source app helpers
-source /usr/share/yunohost/helpers
 
 CHECK_VAR "$app" "app name not set"
 

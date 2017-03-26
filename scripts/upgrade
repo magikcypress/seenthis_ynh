@@ -30,6 +30,8 @@ root_pwd=$(sudo cat /etc/yunohost/mysql)
 
 final_path=/var/www/$app
 
+SETUP_SOURCE
+
 db_name=$app
 
 CHECK_MD5_CONFIG "connect.php" "$final_path/config/connect.php"	# Créé un backup du fichier de config si il a été modifié.

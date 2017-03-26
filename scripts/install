@@ -46,7 +46,7 @@ GENERATE_DB $app	# Créer une base de données et un utilisateur dédié au nom 
 sudo mkdir "$final_path"
 ynh_app_setting_set $app final_path $final_path
 # Télécharge la source de SPIP
-SETUP_SOURCE "spip-2.1.zip"
+SETUP_SOURCE
 
 # Crée le répertoire pour placé les plugins
 sudo mkdir "$final_path/plugins"

@@ -81,30 +81,30 @@ GENERATE_DB () {	# Créer une base de données et un utilisateur dédié au nom 
 	ynh_app_setting_set $app mysqlpwd $db_pwd
 }
 
-SETUP_SOURCE () {	# Télécharge la source, décompresse et copie dans $final_path
-# $1 = Nom de l'archive téléchargée.
-	wget -nv --show-progress -i ../sources/source_url -O $1
-	# Vérifie la somme de contrôle de la source téléchargée.
-	md5sum -c ../sources/source_md5 --status || (echo "Corrupt source" >&2 && false)
-	# Décompresse la source
-	if [ "$(echo ${1##*.})" == "gz" ]; then
-		tar -x -f $1
-	elif [ "$(echo ${1##*.})" == "zip" ]; then
-		unzip -q $1
+SETUP_SOURCE () {	# Download source, decompress and copu into $final_path
+	src=$(cat ../sources/source_md5 | awk -F' ' {'print $2'})
+	sudo wget -nv -i ../sources/source_url -O $src
+	# Checks the checksum of the downloaded source.
+	# md5sum -c ../sources/source_md5 --status || ynh_die "Corrupt source"
+	# Decompress source
+	if [ "$(echo ${src##*.})" == "tgz" ]; then
+		tar -x -f $src
+	elif [ "$(echo ${src##*.})" == "zip" ]; then
+		unzip -q $src
 	else
-		false	# Format d'archive non pris en charge.
+		false	# Unsupported archive format.
 	fi
-	# Copie les fichiers sources
+	# Copy file source
 	sudo cp -a $(cat ../sources/source_dir)/. "$final_path"
-	# Copie les fichiers additionnels ou modifiés.
+	# Copy additional file and modified
 	if test -e "../sources/ajouts"; then
 		sudo cp -a ../sources/ajouts/. "$final_path"
 	fi
 }
 
 SETUP_PLUGINS () { # Télécharge les plugins, décompresse et copie dans $final_path
-	wget -nv --show-progress -i ../sources/source_plugins
-	wget -nv --show-progress -i ../sources/source_md5_plugins
+	wget -nv -i ../sources/source_plugins
+	wget -nv -i ../sources/source_md5_plugins
 	while IFS=: read md5 file
 	do
 		# Vérifie la somme de contrôle de la source téléchargée.

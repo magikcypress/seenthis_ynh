@@ -3,7 +3,7 @@
 	"id": "seenthis",
 	"packaging_format": 1,
 	"description": {
-		"en": "Seenthis - Short-blogging destiné à la veille d’actualité.",
+		"en": "Seenthis - an open source blogging and curating platform.",
 		"fr": "Seenthis - Short-blogging destiné à la veille d’actualité."
 	},
 	"version": "1.0.0",
